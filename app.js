@@ -77,7 +77,27 @@ function getAverage(elmt){
 
   var avg = sum/elmt.length;
   return avg;
-
 }
 
-
+function getTotalWins(){
+  for (i=1; i<11; i++){
+    var team = teamMap[i];
+    var numberOfWeeks = team['Points'].length;
+    var teamWins = 0;
+    var teamLosses = 0;
+    for (opponentNumber = 1; opponentNumber < 11; opponentNumber++){
+      // dont play same team
+      if (i === opponentNumber) continue;
+      var opponent = teamMap[opponentNumber];
+      for (week = 0; week < numberOfWeeks; week++){
+        if (team['Points'][week] > opponent['Points'][week]){
+          teamWins++;
+        } else {
+          teamLosses++;
+        }
+      }
+    }
+    team['TotalWins'] = teamWins;
+    team['TotalLosses'] = teamLosses;
+  }
+}
